@@ -96,7 +96,21 @@ fn main() {
 
     match foo {
         Foo { x: (1, b), y } => println!(" First of x is 1, b ={}, y={}", b, y),
-        Foo {y: 2, x: i} => println!("y is 2, i = {:?}", i),
-        _ => print!("Not found")
+        Foo {y: 4, x: i} => println!("y is 2, i = {:?}", i),
+        Foo {y, ..} => println!("y = {}, we don't  care about", y),
     }
+
+    let faa = Foo { x: (1,2), y:3 };
+
+    let Foo {x: x0, y: y0} = faa;
+
+    println!("Outside: x0 = {x0:?}, y0: {y0}");
+
+    struct Bar {
+        fooo: Foo,
+    }
+
+    let bar = Bar {fooo: faa};
+    let Bar {fooo: Foo {x: nested_x, y: nested_y}} = bar;
+    println!("Nested: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
 }
