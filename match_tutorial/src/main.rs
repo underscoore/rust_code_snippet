@@ -1,6 +1,9 @@
-struct Foo{
-    x:(u32, u32),
+struct Foo {
+    x: (u32, u32),
     y: u32,
+}
+struct Bar {
+    fooo: Foo,
 }
 
 #[allow(dead_code)]
@@ -18,7 +21,6 @@ enum Color {
     CMYK(u32, u32, u32, u32),
 }
 
-
 fn main() {
     // match is like a switch in other language
     //
@@ -28,7 +30,7 @@ fn main() {
     match number {
         1 => println!("One!"),
         2 | 3 | 5 | 7 | 11 | 13 => println!("This is prime number!!"),
-        13..=19 => println!("A Teen"), 
+        13..=19 => println!("A Teen"),
         _ => println!("Ain't special"),
     }
 
@@ -56,16 +58,28 @@ fn main() {
 
     match array {
         [0, second, third] => println!("array[0] = 0, array[1] = {}, array[2] = {}", second, third),
-        [1, _, third] => println!("array[0] = 1, array[2] = {} and array[1] was ignored", third),
-        [-1, second, ..] => println!("array[0] = -1, array[1] = {} and all the other ones are ignored", second),
-        [3, second, tail @ ..] => println!("array[0] = 3, array[1] = {} and the other elements were {:?}", second, tail),
-        [first, middle @ .., last] => println!("array[0] = {}, middle = {:?} and array[2] = {}", first, middle, last),
+        [1, _, third] => println!(
+            "array[0] = 1, array[2] = {} and array[1] was ignored",
+            third
+        ),
+        [-1, second, ..] => println!(
+            "array[0] = -1, array[1] = {} and all the other ones are ignored",
+            second
+        ),
+        [3, second, tail @ ..] => println!(
+            "array[0] = 3, array[1] = {} and the other elements were {:?}",
+            second, tail
+        ),
+        [first, middle @ .., last] => println!(
+            "array[0] = {}, middle = {:?} and array[2] = {}",
+            first, middle, last
+        ),
         _ => println!("Temp Cases"),
     }
 
     println!("\n=== Like tuple enums can be destructured!\n");
 
-    let color = Color::RGB(122,17,40);
+    let color = Color::RGB(122, 17, 40);
 
     println!("What color is it?");
     match color {
@@ -76,7 +90,10 @@ fn main() {
         Color::HSV(h, s, v) => println!("Hue: {}, Saturation: {}, Value: {}", h, s, v),
         Color::HSL(h, s, l) => println!("Hue: {}, Saturation: {}, lightness: {}", h, s, l),
         Color::CMY(c, m, y) => println!("Cyan: {}, Magenta: {}, Yellow: {}", c, m, y),
-        Color::CMYK(c, m, y, k) => println!("Cyan: {}, Magenta: {}, Yellow: {}, Key (black): {}", c, m, y, k),
+        Color::CMYK(c, m, y, k) => println!(
+            "Cyan: {}, Magenta: {}, Yellow: {}, Key (black): {}",
+            c, m, y, k
+        ),
     }
 
     println!("\n=== Pointes/refs!\n");
@@ -92,25 +109,26 @@ fn main() {
         val => println!("Got a value via dereferencing: {:?}", val),
     }
 
-    let foo = Foo {x: (3,2), y: 2};
+    let foo = Foo { x: (3, 2), y: 2 };
 
     match foo {
         Foo { x: (1, b), y } => println!(" First of x is 1, b ={}, y={}", b, y),
-        Foo {y: 4, x: i} => println!("y is 2, i = {:?}", i),
-        Foo {y, ..} => println!("y = {}, we don't  care about", y),
+        Foo { y: 4, x: i } => println!("y is 2, i = {:?}", i),
+        Foo { y, .. } => println!("y = {}, we don't  care about", y),
     }
 
-    let faa = Foo { x: (1,2), y:3 };
+    let faa = Foo { x: (1, 2), y: 3 };
 
-    let Foo {x: x0, y: y0} = faa;
+    let Foo { x: x0, y: y0 } = faa;
 
     println!("Outside: x0 = {x0:?}, y0: {y0}");
 
-    struct Bar {
-        fooo: Foo,
-    }
-
-    let bar = Bar {fooo: faa};
-    let Bar {fooo: Foo {x: nested_x, y: nested_y}} = bar;
+    let bar = Bar { fooo: faa };
+    let Bar {
+        fooo: Foo {
+            x: nested_x,
+            y: nested_y,
+        },
+    } = bar;
     println!("Nested: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
 }
