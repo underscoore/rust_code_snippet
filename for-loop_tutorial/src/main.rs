@@ -1,3 +1,4 @@
+use colored::*;
 fn main() {
     for n in 1..101 {
         if n % 15 == 0 {
@@ -67,5 +68,6 @@ fn main() {
     }
     println!("Neams3: {:?}", names3);
 
-
+let ss = "This is string".to_string();
+    println!("{}", ss.color("red"));
 }
