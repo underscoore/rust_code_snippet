@@ -1,7 +1,4 @@
-struct Number {
-    a: i32,
-    b: i32,
-}
+use crate::operatons::structs::Number;
 
 pub fn sub(na: i32, nb: i32) -> i32 {
     let value: Number = Number {a: na, b: nb };
