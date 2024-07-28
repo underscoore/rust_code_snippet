@@ -2,15 +2,17 @@
 // This algorithm shorts the values
 pub fn dsc_sorting<T: PartialOrd + Copy>(list: &Vec<T>) -> Vec<T> {
     let mut list = list.clone();
-    for i in 0..list.len() {
-        for j in i + 1..list.len() {
-            if list[i] < list[j] {
-                let tem = list[i];
-                list[i] = list[j];
-                list[j] = tem;
+    if list.len() > 1 {
+        for i in 0..list.len() {
+            for j in i + 1..list.len() {
+                if list[i] < list[j] {
+                    let tem = list[i];
+                    list[i] = list[j];
+                    list[j] = tem;
+                }
             }
         }
-    }
+    } 
     list
 }
 

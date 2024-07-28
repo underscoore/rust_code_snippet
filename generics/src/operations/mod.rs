@@ -1,4 +1,3 @@
 pub mod max;
-pub mod sorting;
+pub mod n_sorting;
 pub mod min;
-
