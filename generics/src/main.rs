@@ -3,6 +3,7 @@ mod sorting;
 use operations::max::get_max;
 use operations::min::get_min;
 use operations::n_sorting::{asc_sorting, dsc_sorting};
+use operations::implx;
 mod data;
 use sorting::sorting::{d_sorting, a_sorting};
 fn main() {
@@ -31,4 +32,11 @@ fn main() {
     println!("==> Sorting using structs Impl");
     println!("{:?}", d_sorting(&data::list()));
     println!("{:?}", a_sorting(&data::list()));
+    
+    // Initailize the value of structs
+    let x = implx::Val{val: 3.33};
+    let y = implx::GenVal{gen_val: 4i32};
+
+    println!("The value of VAL struct: {}", x.value());
+    println!("This value of GENVAL struct: {}", y.value());
 }

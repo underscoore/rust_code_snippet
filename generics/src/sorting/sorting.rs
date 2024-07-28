@@ -6,8 +6,8 @@ pub struct SortingStruct<L>{
 }
 
 pub fn d_sorting<T: PartialOrd + Copy>(list: &Vec<T>) -> Vec<T> {
-    let list = SortingStruct {list: list.clone()};
-    n_sorting::dsc_sorting(&list.list)
+    let list = SortingStruct {list: list.clone()}; // First Initailaize the value of struct;
+    n_sorting::dsc_sorting(&list.list) //Then call the Initailaize Value;
 }
 
 pub fn a_sorting<T: PartialOrd + Copy>(list: &Vec<T>) -> Vec<T> {
